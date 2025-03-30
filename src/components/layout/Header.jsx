@@ -1,16 +1,17 @@
 import { AppBar, Backdrop, Box, IconButton, Toolbar, Tooltip, Typography } from '@mui/material'
 import { orange } from '../../constants/color'
 import React, { Suspense, lazy } from 'react'
-import { Menu as MenuIcon, Search as SearchIcon, Add as AddIcon, Group as GroupIcon,Logout as LogoutIcon ,Notifications as NotificationsIcon} from '@mui/icons-material'
+import { Menu as MenuIcon, Search as SearchIcon, Add as AddIcon, Group as GroupIcon, Logout as LogoutIcon, Notifications as NotificationsIcon } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { LayoutLoader } from './Loaders';
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 
 
 
-const SearchDialog=lazy(()=> import("../specific/Search"))
-const NotificcationDialog=lazy(()=> import("../specific/Notifications"))
-const NewGroupDialog=lazy(()=> import("../specific/NewGroup"))
+const SearchDialog = lazy(() => import("../specific/Search"))
+const NotificcationDialog = lazy(() => import("../specific/Notifications"))
+const NewGroupDialog = lazy(() => import("../specific/NewGroup"))
 
 const Header = () => {
 
@@ -22,27 +23,31 @@ const Header = () => {
   const [isNotifications, setNotifications] = useState(false)
 
   const handelMobile = () => {
-    setmobile((prev)=>!prev)
-    console.log("Moobile");
+    setmobile((prev) => !prev)
+    console.log("Mobile");
   }
 
   const openSearch = () => {
-    setSearch((prev)=>!prev);
+    setSearch((prev) => !prev);
     console.log("openSearchDialoge");
   }
 
   const openNewGroup = () => {
-    setNewGroup((prev)=>!prev);
+    setNewGroup((prev) => !prev);
     console.log("openNewGroup");
   }
 
-  const openNotifications=()=>{
-    setNotifications((prev)=>!prev);
+  const openNotifications = () => {
+    setNotifications((prev) => !prev);
     console.log("openNotifications");
   }
 
   const navigateToGroup = () => {
     naivagate("/groups")
+  }
+
+  const navigateToAdmin = () => {
+    naivagate("/admin")
   }
 
   const logouthandler = () => {
@@ -93,7 +98,7 @@ const Header = () => {
                 onClick={openSearch}
               />
 
-             
+
 
               <IconBtn
                 title={"New Group"}
@@ -101,7 +106,7 @@ const Header = () => {
                 onClick={openNewGroup}
               />
 
-              
+
 
               <IconBtn
                 title={"Manage Group"}
@@ -109,12 +114,18 @@ const Header = () => {
                 onClick={navigateToGroup}
               />
 
-              
+
 
               <IconBtn
                 title={"Notifications"}
                 icon={<NotificationsIcon />}
                 onClick={openNotifications}
+              />
+
+              <IconBtn
+                title={"Admin Panel"}
+                icon={<AdminPanelSettingsIcon />}
+                onClick={navigateToAdmin}
               />
 
 
@@ -134,29 +145,29 @@ const Header = () => {
       </Box>
 
 
-              {
-                isSearch &&(
-                  <Suspense fallback={<Backdrop open/>}>
-                    <SearchDialog/>
-                  </Suspense>
-                )
-              }
+      {
+        isSearch && (
+          <Suspense fallback={<Backdrop open />}>
+            <SearchDialog />
+          </Suspense>
+        )
+      }
 
-              {
-                isNotifications &&(
-                  <Suspense fallback={<Backdrop open/>}>
-                    <NotificcationDialog/>
-                  </Suspense>
-                )
-              }
+      {
+        isNotifications && (
+          <Suspense fallback={<Backdrop open />}>
+            <NotificcationDialog />
+          </Suspense>
+        )
+      }
 
-              {
-                isNewGroup &&(
-                  <Suspense fallback={<Backdrop open/>}>
-                    <NewGroupDialog/>
-                  </Suspense>
-                )
-              }
+      {
+        isNewGroup && (
+          <Suspense fallback={<Backdrop open />}>
+            <NewGroupDialog />
+          </Suspense>
+        )
+      }
 
 
 
